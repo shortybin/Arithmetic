@@ -56,7 +56,7 @@ public class Sort {
     public static void selectSort(int[] data) {
         int tem;
         int tag;//记录最小值的下标
-        for (int i = 0; i < data.length-1; i++) {
+        for (int i = 0; i < data.length - 1; i++) {
             tag = i;
             for (int j = i + 1; j < data.length; j++) {
                 if (data[tag] > data[j]) {//把记录的数值和循环的数值比较，有更小的替换记录下标
@@ -71,6 +71,44 @@ public class Sort {
             }
             //printline(data);
 
+        }
+        printline(data);
+    }
+
+    /**
+     * 插入排序 从下标为i开始，和i-1之前的所有数比较，小的换到前面
+     *
+     * @param data
+     */
+    public static void instertionSort(int[] data) {
+        int tem;
+        for (int i = 1; i < data.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (data[j] < data[j - 1]) {
+                    tem = data[j];
+                    data[j] = data[j - 1];
+                    data[j - 1] = tem;
+                }
+            }
+        }
+        printline(data);
+    }
+
+    /**
+     * 优化后的插入排序，当j下标的元素大于j-1的元素，之前的不用再去比较，之前的数据
+     * 都是已经排好的
+     * @param data
+     */
+    public static void instertionSort_1(int[] data) {
+        int tem;
+        for (int i = 1; i < data.length; i++) {
+            int j = i;
+            while (j > 0 && data[j] < data[j - 1]) {
+                tem = data[j];
+                data[j] = data[j - 1];
+                data[j - 1] = tem;
+                j--;
+            }
         }
         printline(data);
     }
