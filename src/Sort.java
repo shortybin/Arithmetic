@@ -53,7 +53,7 @@ public class Sort {
      *
      * @param data
      */
-    public static void selectSort(int[] data) {
+    public static void selectSort_1(int[] data) {
         int tem;
         int tag;//记录最小值的下标
         for (int i = 0; i < data.length - 1; i++) {
@@ -71,6 +71,38 @@ public class Sort {
             }
             //printline(data);
 
+        }
+        printline(data);
+    }
+
+    /**
+     * 优化后的选择排序，每次循环找出最大值和最小值，替换到头部和尾部
+     * 总循环数为总数/2
+     * @param data
+     */
+    public static void selectSort_2(int[] data) {
+        int min, max, tem;//min为最下值下标，max为最大值下标
+        for (int i = 1; i <= data.length / 2; i++) {
+            min=i;max=i;
+            for (int j = i+1; j <=data.length-i; j++) {
+                if (data[j]>data[max]){
+                    max=j;
+                    continue;
+                }
+                if (data[j]<data[min]){
+                    min=j;
+                }
+            }
+            if (min!=i-1){
+                tem=data[i-1];
+                data[i-1]=data[min];
+                data[min]=tem;
+            }
+            if (max!=data.length-i){
+                tem=data[data.length-i];
+                data[data.length-i]=data[max];
+                data[max]=tem;
+            }
         }
         printline(data);
     }
@@ -97,6 +129,7 @@ public class Sort {
     /**
      * 优化后的插入排序，当j下标的元素大于j-1的元素，之前的不用再去比较，之前的数据
      * 都是已经排好的
+     *
      * @param data
      */
     public static void instertionSort_1(int[] data) {
